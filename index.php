@@ -15,9 +15,31 @@
     </head>
 
     <body>
-
-        
-
+        <div class="general">
+            <div class="app">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- elemento principale che contiene la lista -->
+                            <h2 class="h2 display-1 text-muted"> To do List PHP</h2>
+                            <ul class="list-group list-group-flush border border-1 rounded">
+                                <li v-for="(item, index) in todoList" :key="index" class="list-group-item"> {{ item }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group mb-3">
+                                <input type="text" @keyup.enter="updateList" v-model="todoItem" placeholder="ToDo" class="form-control">
+                                <button type="button" @click="uodateList" class="btn btn-outline-success"  id="button-add">Aggiungi Task</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- link axios -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
