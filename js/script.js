@@ -1,31 +1,33 @@
 const { createApp } = Vue;
 
+// Crea un'applicazione Vue
 createApp({
     data() {
         return {
-            /* inizializzo le variabili vuote */
-            todoItem: '',
-            todoList: null,
-            /* Imposto come apiURL il file che contiene i dati */
-            apiUrl: 'server.php'
+            /* Inizializza le variabili vuote */
+            todoItem: '', // Rappresenta il valore di un nuovo elemento da aggiungere
+            todoList: null, // Conserva la lista degli elementi della lista TODO ottenuta dal server
+            apiUrl: 'server.php' // Specifica l'URL del file server.php che gestisce le richieste API
         }
     },
+
     mounted() {
-        /* effettuo la chiamata AXIOS per recuperare i dati */
+        /* Effettua una chiamata AXIOS per recuperare i dati */
         axios.get(this.apiUrl).then((response) => {
             this.todoList = response.data;
         });
     },
+
     methods: {
-        /* Faccio la funzione per aggiornare la lista con i nuovi elementi */
+        /* Funzione per aggiornare la lista con i nuovi elementi */
         updateList() {
             const data = {
                 todoItem: this.todoItem
             }
 
-            /* Effettuo chiamata AXIOS POST per inserire la task aggiunta in quella già presente */
+            /* Effettua una chiamata AXIOS di tipo POST per inserire il nuovo task nella lista esistente */
             axios.post(this.apiUrl, data, {
-                /* con questa funzione salvo i dati nel file aggiornando quello esistente */
+                /* Imposta l'intestazione della richiesta per salvare i dati nel file e aggiornarlo */
                 headers: { 'Content-Type': 'multipart/form-data' }
             }).then((response) => {
                 this.todoItem = '';
