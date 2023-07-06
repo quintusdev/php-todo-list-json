@@ -23,13 +23,27 @@
                             <!-- elemento principale che contiene la lista -->
                             <h2 class="display-1 text-light"><strong>To do List PHP</strong></h2>
                             <ul class="list-group list-group-flush border border-1 rounded">
-                                <li v-for="(item, index) in todoList" :key="index" class="list-group-item"> {{ item.text }}</li>
+                                <li v-for="(item, index) in todoList" :key="index" class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div :class="item.done === true ? 'item-done' : '' ">
+                                        {{ item.text }}
+                                    </div>
+                                    <div>
+                                        <!-- Pulsante di check o croce -->
+                                        <button class="me-1 btn btn-sm" :class="item.done ? 'btn-dark' : 'btn-success'" @click="changeTaskStatus(index)">
+                                            <i class="fas" :class="item.done ? 'fa-x' : 'fa-check'"></i>
+                                        </button>
+                                        <!-- Pulsante per rimuovere l'attività -->
+                                        <button class="btn btn-sm btn-danger" @click="deleteTask(index)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-12">
                             <div class="input-group mb-3">
                                 <input type="text" @keyup.enter="updateList" v-model="todoItem" placeholder="Task da aggiungere" class="form-control mt-2">

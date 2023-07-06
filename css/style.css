@@ -12,3 +12,12 @@
     align-items: center;
     background-color: #002e69;
 }
+
+.list-unstyled li {
+    padding: 25px 0;
+    border-bottom: 1px solid whitesmoke;
+}
+
+.item-done {
+    text-decoration: line-through;
+}

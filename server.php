@@ -1,21 +1,34 @@
 <?php
-    /* Recupero il contenuto del file JSON attraverso FILE_GET_CONTENTS */
-    $string = file_get_contents('data/todoList.json');
-    /* Converto il contenuto in un array per farlo funzionare da PHP */
-    $array = json_decode($string, true);
+// Percorso del file JSON
+$jsonFilePath = 'data/todoList.json';
 
-    /* controllo se ho inviato i dati che salvo nel JSON */
-    if(isset($_POST['todoItem'])){
-        /* pusho l'elemento all'interno dell'array */
-        array_push($array, $_POST['todoItem']);
-        /* Faccio l'encode dell'array per convertirlo in JSON */
-        $array_converted = json_encode($array);
+// Recupera il contenuto del file JSON
+$jsonContent = file_get_contents($jsonFilePath);
 
-        /* Salvo il contenuto nel file JSON con FILE_PUT_CONTENT */
-        file_put_contents('data/todoList.json', $array_converted);
-    }
+// Converte il contenuto in un array associativo
+$todoList = json_decode($jsonContent, true);
 
-    header('Content-Type: application/json');
-    /* Visualizzo l'array con encode */
-    echo json_encode($array);
+// Controllo se è stata inviata una richiesta POST per aggiungere una nuova task
+if (isset($_POST['todoItem'])) {
+    // Recupera il valore inviato
+    $newTask = array(
+        'text' => $_POST['todoItem'],
+        'done' => false
+    );
+
+    // Aggiunge la nuova task all'array
+    $todoList[] = $newTask;
+
+    // Converte l'array in formato JSON
+    $updatedJsonContent = json_encode($todoList, JSON_PRETTY_PRINT);
+
+    // Salva il contenuto nel file JSON
+    file_put_contents($jsonFilePath, $updatedJsonContent);
+}
+
+// Imposta l'intestazione della risposta come JSON
+header('Content-Type: application/json');
+
+// Restituisce l'array della lista delle task come JSON
+echo json_encode($todoList);
 ?>
