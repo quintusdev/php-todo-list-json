@@ -16,14 +16,14 @@
 
     <body>
         <div class="general">
-            <div class="app">
+            <div id="app">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <!-- elemento principale che contiene la lista -->
-                            <h2 class="h2 display-1 text-muted"> To do List PHP</h2>
+                            <h2 class="display-1 text-light"><strong>To do List PHP</strong></h2>
                             <ul class="list-group list-group-flush border border-1 rounded">
-                                <li v-for="(item, index) in todoList" :key="index" class="list-group-item"> {{ item }}</li>
+                                <li v-for="(item, index) in todoList" :key="index" class="list-group-item"> {{ item.text }}</li>
                             </ul>
                         </div>
                     </div>
@@ -32,8 +32,8 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="input-group mb-3">
-                                <input type="text" @keyup.enter="updateList" v-model="todoItem" placeholder="ToDo" class="form-control">
-                                <button type="button" @click="uodateList" class="btn btn-outline-success"  id="button-add">Aggiungi Task</button>
+                                <input type="text" @keyup.enter="updateList" v-model="todoItem" placeholder="Task da aggiungere" class="form-control mt-2">
+                                <button type="button" @click="updateList" class="btn btn-success mt-2" id="button-add">Aggiungi Task</button>
                             </div>
                         </div>
                     </div>
