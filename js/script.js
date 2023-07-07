@@ -40,7 +40,12 @@ createApp({
         },
         // Metodo per cancellare la task nella posizione X dell'array con SPLICE
         deleteTask(index) {
-            this.todoList.splice(index, 1);
+            const data = new FormData();
+            data.append('deleteTask', index);
+
+            axios.get(this.apiUrl).then((response) => {
+                this.todoList = response.data;
+            });
         }
     }
 }).mount('#app');

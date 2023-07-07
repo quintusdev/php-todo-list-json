@@ -18,6 +18,16 @@
 
         // Aggiunge la nuova task all'array
         $todoList[] = $newTask;
+    
+        // Converte l'array in formato JSON
+        $updatedJsonContent = json_encode($todoList, JSON_PRETTY_PRINT);/* <-- l'output JSON risultante viene formattato con indentazione e ritorni a capo, per renderlo più facile da leggere e comprendere.*/
+
+        // Salva il contenuto nel file JSON
+        file_put_contents($jsonFilePath, $updatedJsonContent);
+    }
+
+    if (isset($_POST['deleteTask'])) {
+        array_splice($array, $_POST['deleteTask'], 1);
 
         // Converte l'array in formato JSON
         $updatedJsonContent = json_encode($todoList, JSON_PRETTY_PRINT);/* <-- l'output JSON risultante viene formattato con indentazione e ritorni a capo, per renderlo più facile da leggere e comprendere.*/
